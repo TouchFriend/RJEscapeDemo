@@ -16,6 +16,7 @@
 		BF84DFC82520885D0084DC02 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BF84DFC72520885D0084DC02 /* main.m */; };
 		BF84DFD22520885D0084DC02 /* RJEscapeDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BF84DFD12520885D0084DC02 /* RJEscapeDemoTests.m */; };
 		BF84DFDD2520885D0084DC02 /* RJEscapeDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = BF84DFDC2520885D0084DC02 /* RJEscapeDemoUITests.m */; };
+		BF84DFEF252088810084DC02 /* NSString+RJAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = BF84DFEE252088810084DC02 /* NSString+RJAdd.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,8 @@
 		BF84DFD82520885D0084DC02 /* RJEscapeDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RJEscapeDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF84DFDC2520885D0084DC02 /* RJEscapeDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RJEscapeDemoUITests.m; sourceTree = "<group>"; };
 		BF84DFDE2520885D0084DC02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BF84DFED252088810084DC02 /* NSString+RJAdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+RJAdd.h"; sourceTree = "<group>"; };
+		BF84DFEE252088810084DC02 /* NSString+RJAdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+RJAdd.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +118,8 @@
 				BF84DFC32520885D0084DC02 /* LaunchScreen.storyboard */,
 				BF84DFC62520885D0084DC02 /* Info.plist */,
 				BF84DFC72520885D0084DC02 /* main.m */,
+				BF84DFED252088810084DC02 /* NSString+RJAdd.h */,
+				BF84DFEE252088810084DC02 /* NSString+RJAdd.m */,
 			);
 			path = RJEscapeDemo;
 			sourceTree = "<group>";
@@ -270,6 +275,7 @@
 				BF84DFB72520885A0084DC02 /* AppDelegate.m in Sources */,
 				BF84DFC82520885D0084DC02 /* main.m in Sources */,
 				BF84DFBA2520885A0084DC02 /* SceneDelegate.m in Sources */,
+				BF84DFEF252088810084DC02 /* NSString+RJAdd.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
