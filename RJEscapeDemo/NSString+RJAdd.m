@@ -28,19 +28,19 @@
 
 NSString *esp(NSString *src){
     NSMutableString *result = [NSMutableString string];
-    for (NSInteger i = 0; i < [src length] ; i++) {
+    for (NSInteger i = 0; i < src.length; i++) {
         unichar c  = [src characterAtIndex:i];
         if(isdigit(c) || isupper(c) || islower(c)){
             [result appendFormat:@"%c", c];
-        } else if((int)c <256){
+        } else if((int)c < 256){
             [result appendString:@"%"];
-            if((int)c <16){
+            if((int)c < 16){
                 [result appendString:@"0"];
             }
-            [result appendFormat:@"%@", tohex((int)c)];
+            [result appendFormat:@"%@", int64ToHex((int64_t)c)];
         } else {
             [result appendString:@"%u"];
-            [result appendFormat:@"%@", tohex(c)];
+            [result appendFormat:@"%@", int64ToHex((int64_t)c)];
         }
     }
     return [result copy];
@@ -128,38 +128,37 @@ int  getIntStr(NSString *src,int len){
     
 }
 
-NSString * tohex(int tmpid)
+NSString *int64ToHex(int64_t num)
 {
-    NSString *nLetterValue;
-    NSString *str =@"";
-    long long int ttmpig;
-    for (int i = 0; i<9; i++) {
-        ttmpig=tmpid%16;
-        tmpid=tmpid/16;
-        switch (ttmpig)
+    NSString *letterValue;
+    NSMutableString *result = [NSMutableString string];
+    long long int remainder;
+    for (int i = 0; i < 19; i++) {
+        remainder = num % 16;
+        num = num / 16;
+        switch (remainder)
         {
             case 10:
-                nLetterValue =@"A";break;
+                letterValue = @"A"; break;
             case 11:
-                nLetterValue =@"B";break;
+                letterValue = @"B"; break;
             case 12:
-                nLetterValue =@"C";break;
+                letterValue = @"C"; break;
             case 13:
-                nLetterValue =@"D";break;
+                letterValue = @"D"; break;
             case 14:
-                nLetterValue =@"E";break;
+                letterValue = @"E"; break;
             case 15:
-                nLetterValue =@"F";break;
-            default:nLetterValue=[[NSString alloc]initWithFormat:@"%lli",ttmpig];
-                
+                letterValue = @"F"; break;
+            default:
+                letterValue = [[NSString alloc] initWithFormat:@"%lld", remainder];
         }
-        str = [nLetterValue stringByAppendingString:str];
-        if (tmpid == 0) {
+        [result insertString:letterValue atIndex:0];
+        if (num == 0) {
             break;
         }
-        
     }
-    return str;
+    return [result copy];
 }
 
 @end
