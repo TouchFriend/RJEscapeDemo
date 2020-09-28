@@ -17,30 +17,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//    NSString *str = @"关于对《关于征求\"关于进一步加快推进体育强市建设的意见\"（征求意见稿）意见的函》的回复意见";
-//    NSString *encodeStr = [NSString rj_escapeEncode:str];
-//    NSLog(@"encode: %@", encodeStr);
-//    NSString *decodeStr = [NSString rj_escapeDecode:encodeStr];
-//    NSLog(@"decode: %@", decodeStr);
-//    NSLog(@"%ld", [self numberWithHexString:@"5173"]);
-    NSInteger num = 145121545151;
-    NSString *hexStr = [self stringWithHexNumber:num];
-    NSLog(@"%@", hexStr);
-    NSLog(@"%ld", [self numberWithHexString:hexStr]);
-}
-
-- (NSString *)stringWithHexNumber:(NSUInteger)hexNumber {
-    char hexChar[40];
-    sprintf(hexChar, "%lx", hexNumber);
-    NSString *hexString = [NSString stringWithCString:hexChar encoding:NSUTF8StringEncoding];
-    return hexString;
-}
-
-- (NSInteger)numberWithHexString:(NSString *)hexString {
-    const char *hexChar = [hexString cStringUsingEncoding:NSUTF8StringEncoding];
-    NSInteger hexNumber;
-    sscanf(hexChar, "%lx", &hexNumber);
-    return (NSInteger)hexNumber;
+    NSString *str = @"关于对《关于征求\"关于进一步加快推进体育强市建设的意见\"（征求意见稿）意见的函》的回复意见";
+    NSString *encodeStr = [NSString rj_escapeEncode:str];
+    NSLog(@"encode: %@", encodeStr);
+    NSString *decodeStr = [NSString rj_escapeDecode:encodeStr];
+    NSLog(@"decode: %@", decodeStr);
 }
 
 @end
