@@ -22,7 +22,18 @@
     NSLog(@"encode: %@", encodeStr);
     NSString *decodeStr = [NSString rj_escapeDecode:encodeStr];
     NSLog(@"decode: %@", decodeStr);
+//    NSLog(@"%ld", [self numberWithHexString:@"5173"]);
 }
 
+- (NSInteger)numberWithHexString:(NSString *)hexString{
+
+    const char *hexChar = [hexString cStringUsingEncoding:NSUTF8StringEncoding];
+    
+    int hexNumber;
+    
+    sscanf(hexChar, "%x", &hexNumber);
+    
+    return (NSInteger)hexNumber;
+}
 
 @end

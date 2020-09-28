@@ -22,6 +22,7 @@
     if (![str isKindOfClass:[NSString class]] && str.length == 0) {
         return nil;
     }
+    
     return escapeDecoding(str);
 }
 
@@ -50,73 +51,62 @@ NSString *escapeDecoding(NSString *src) {
     int lastPos = 0;
     int pos = 0;
     unichar ch;
-    NSString * tmp = @"";
-    while(lastPos<src.length) {
+    NSString *tmp = @"";
+    while(lastPos < src.length) {
         NSRange range;
-        
-        range = [src rangeOfString:@"%" options:NSLiteralSearch range:NSMakeRange(lastPos, src.length-lastPos)];
+        range = [src rangeOfString:@"%" options:NSLiteralSearch range:NSMakeRange(lastPos, src.length - lastPos)];
         if (range.location != NSNotFound) {
             pos = (int)range.location;
-        }else{
+        } else {
             pos = -1;
         }
-        
-        if(pos == lastPos){
-            
-            if([src characterAtIndex:(NSUInteger)(pos+1)]=='u'){
-                NSString* ts = [src substringWithRange:NSMakeRange(pos+2,4)];
-                
-                int d = getIntStr(ts,4);
+        if(pos == lastPos) {
+            if([src characterAtIndex:(NSUInteger)(pos + 1)] == 'u'){
+                NSString *ts = [src substringWithRange:NSMakeRange(pos + 2, 4)];
+                int d = getIntStr(ts, 4);
                 ch = (unichar)d;
                 tmp = [tmp stringByAppendingString:[NSString stringWithFormat:@"%C",ch]];
-                
-                lastPos = pos+6;
-                
-            }else{
-                NSString* ts = [src substringWithRange:NSMakeRange(pos+1,2)];
-                int d = getIntStr(ts,2);
+                lastPos = pos + 6;
+            } else {
+                NSString *ts = [src substringWithRange:NSMakeRange(pos + 1, 2)];
+                int d = getIntStr(ts, 2);
                 ch = (unichar)d;
                 tmp = [tmp stringByAppendingString:[NSString stringWithFormat:@"%C",ch]];
-                lastPos = pos+3;
+                lastPos = pos + 3;
             }
-            
-        }else{
-            if(pos ==-1){
-                NSString* ts = [src substringWithRange:NSMakeRange(lastPos,src.length-lastPos)];
-                
+        } else {
+            if(pos == -1) {
+                NSString *ts = [src substringWithRange:NSMakeRange(lastPos, src.length - lastPos)];
                 tmp = [tmp stringByAppendingString:[NSString stringWithFormat:@"%@",ts]];
                 lastPos = (int)src.length;
-            }else{
-                NSString* ts = [src substringWithRange:NSMakeRange(lastPos,pos-lastPos)];
-                
+            } else {
+                NSString *ts = [src substringWithRange:NSMakeRange(lastPos, pos - lastPos)];
                 tmp = [tmp stringByAppendingString:[NSString stringWithFormat:@"%@",ts]];
                 lastPos  = pos;
             }
         }
     }
-    
     return tmp;
 }
 
 Byte getInt(char c){
-    if(c>='0'&&c<='9'){
-        return c-'0';
-    }else if((c>='a'&&c<='f')){
-        return 10+(c-'a');
-    }else if((c>='A'&&c<='F')){
-        return 10+(c-'A');
+    if(c >= '0' && c<= '9') {
+        return c - '0';
+    } else if((c >= 'a' && c<= 'f')) {
+        return 10 + (c - 'a');
+    } else if((c >= 'A' && c<= 'F')) {
+        return 10 + (c - 'A');
     }
+    
     return c;
 }
-int  getIntStr(NSString *src,int len){
-    if(len==2){
+int getIntStr(NSString *src, int len) {
+    if(len == 2) {
         Byte c1 = getInt([src characterAtIndex:(NSUInteger)0]);
         Byte c2 = getInt([src characterAtIndex:(NSUInteger)1]);
-        return ((c1&0x0f)<<4)|(c2&0x0f);
-    }else{
-        
+        return ((c1&0x0f)<<4) | (c2&0x0f);
+    } else {
         Byte c1 = getInt([src characterAtIndex:(NSUInteger)0]);
-        
         Byte c2 = getInt([src characterAtIndex:(NSUInteger)1]);
         Byte c3 = getInt([src characterAtIndex:(NSUInteger)2]);
         Byte c4 = getInt([src characterAtIndex:(NSUInteger)3]);
@@ -125,7 +115,6 @@ int  getIntStr(NSString *src,int len){
                |((c3&0x0f)<<4)
                |(c4&0x0f));
     }
-    
 }
 
 NSString *int64ToHex(int64_t num)
